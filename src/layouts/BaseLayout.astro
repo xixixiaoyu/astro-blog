@@ -1,0 +1,39 @@
+---
+import '../styles/global.css';
+const { title } = Astro.props;
+---
+
+<html lang="zh">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="min-h-screen flex flex-col">
+      <nav class="bg-white dark:bg-gray-800 shadow-md">
+        <div class="max-w-4xl mx-auto px-4 py-5">
+          <div class="flex justify-between items-center">
+            <a href="/" class="text-xl font-bold">我的博客</a>
+            <div class="space-x-6">
+              <a href="/" class="hover:text-blue-500 transition-colors">首页</a>
+              <a href="/blog" class="hover:text-blue-500 transition-colors">博客</a>
+              <a href="/about" class="hover:text-blue-500 transition-colors">关于</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-8">
+        <slot />
+      </main>
+
+      <footer class="bg-white dark:bg-gray-800 shadow-md mt-auto">
+        <div class="max-w-4xl mx-auto px-4 py-6 text-center text-gray-600 dark:text-gray-400">
+          <p>© {new Date().getFullYear()} 我的博客. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html> 

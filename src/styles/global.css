@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--transition-standard: 0.3s ease;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		@apply bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100;
+		@apply leading-relaxed;
+		font-family: 'Inter', system-ui, -apple-system, sans-serif;
+		-webkit-font-smoothing: antialiased;
+		transition: background-color var(--transition-standard);
+	}
+
+	/* 优雅的排版 */
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply font-bold tracking-tight;
+		@apply mb-4;
+	}
+
+	h1 {
+		@apply text-4xl md:text-5xl;
+		@apply mb-6;
+		background: linear-gradient(to right, #1a365d, #2563eb);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		@apply dark:from-blue-400 dark:to-blue-200;
+	}
+
+	h2 {
+		@apply text-2xl md:text-3xl;
+		@apply text-gray-800 dark:text-gray-100;
+	}
+
+	h3 {
+		@apply text-xl md:text-2xl;
+		@apply text-gray-700 dark:text-gray-200;
+	}
+
+	p {
+		@apply mb-6 leading-relaxed;
+		@apply text-gray-700 dark:text-gray-300;
+	}
+
+	a {
+		@apply text-blue-600 dark:text-blue-400;
+		@apply transition-colors duration-200;
+		@apply hover:text-blue-800 dark:hover:text-blue-300;
+		@apply underline-offset-2 hover:underline;
+	}
+}
+
+@layer components {
+	/* 文章卡片样式 */
+	.article-card {
+		@apply bg-white dark:bg-gray-800;
+		@apply rounded-lg shadow-sm hover:shadow-md;
+		@apply transition-all duration-300;
+		@apply p-6;
+		@apply border border-gray-100 dark:border-gray-700;
+	}
+
+	/* 导航栏样式 */
+	.nav-link {
+		@apply px-4 py-2;
+		@apply text-gray-600 dark:text-gray-300;
+		@apply hover:text-blue-600 dark:hover:text-blue-400;
+		@apply transition-colors duration-200;
+		@apply no-underline;
+	}
+
+	/* 按钮样式 */
+	.btn {
+		@apply px-6 py-2;
+		@apply rounded-full;
+		@apply font-medium;
+		@apply transition-all duration-200;
+		@apply hover:transform hover:scale-105;
+		@apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+	}
+
+	.btn-primary {
+		@apply bg-blue-600 text-white;
+		@apply hover:bg-blue-700;
+		@apply focus:ring-blue-500;
+	}
+
+	/* 代码块样式 */
+	pre {
+		@apply p-4 rounded-lg;
+		@apply bg-gray-100 dark:bg-gray-800;
+		@apply overflow-x-auto;
+		@apply my-6;
+	}
+
+	code {
+		@apply font-mono text-sm;
+		@apply px-1.5 py-0.5 rounded;
+		@apply bg-gray-100 dark:bg-gray-800;
+		@apply text-gray-800 dark:text-gray-200;
+	}
+
+	/* 文章目录样式 */
+	.table-of-contents {
+		@apply my-8 p-6 rounded-lg;
+		@apply bg-gray-50 dark:bg-gray-800/50;
+		@apply border border-gray-100 dark:border-gray-700;
+	}
+
+	.table-of-contents-title {
+		@apply text-lg font-semibold mb-4;
+		@apply text-gray-900 dark:text-gray-100;
+	}
+
+	.toc-list {
+		@apply space-y-2;
+	}
+
+	.toc-item {
+		@apply transition-all duration-200;
+	}
+
+	.toc-item a {
+		@apply text-gray-600 dark:text-gray-400;
+		@apply hover:text-blue-600 dark:hover:text-blue-400;
+		@apply no-underline;
+		@apply transition-colors duration-200;
+		@apply block;
+	}
+
+	.toc-item.depth-1 {
+		@apply ml-0;
+	}
+
+	.toc-item.depth-2 {
+		@apply ml-4;
+	}
+
+	.toc-item.depth-3 {
+		@apply ml-8;
+	}
+
+	/* 目录激活状态 */
+	.toc-item.active a {
+		@apply text-blue-600 dark:text-blue-400;
+		@apply font-medium;
+	}
+
+	/* 目录滚动指示器 */
+	.toc-indicator {
+		@apply absolute left-0 w-1 bg-blue-500;
+		@apply transition-all duration-200;
+		@apply rounded-r;
+	}
+}
+
+/* 自定义动画 */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.fade-in {
+	animation: fadeIn 0.5s ease-out forwards;
+}

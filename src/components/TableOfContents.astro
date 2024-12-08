@@ -1,0 +1,63 @@
+---
+// 获取所有标题元素
+const headings = await Astro.props.headings;
+---
+
+<nav class="table-of-contents">
+  <h2 class="table-of-contents-title">目录</h2>
+  <ul class="toc-list">
+    {
+      headings.map((heading) => (
+        <li class={`toc-item depth-${heading.depth}`}>
+          <a href={`#${heading.slug}`}>
+            {heading.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<script>
+  // 处理目录项的激活状态
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 1.0
+  };
+
+  const headings = document.querySelectorAll('h1, h2, h3');
+  const tocItems = document.querySelectorAll('.toc-item a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // 移除所有激活状态
+        tocItems.forEach(item => {
+          item.parentElement?.classList.remove('active');
+        });
+
+        // 添加当前激活状态
+        const href = `#${entry.target.id}`;
+        const activeItem = document.querySelector(`.toc-item a[href="${href}"]`);
+        activeItem?.parentElement?.classList.add('active');
+      }
+    });
+  }, observerOptions);
+
+  headings.forEach(heading => {
+    observer.observe(heading);
+  });
+
+  // 平滑滚动
+  document.querySelectorAll('.toc-item a').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const href = link.getAttribute('href');
+      if (href) {
+        const target = document.querySelector(href);
+        target?.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script> 
